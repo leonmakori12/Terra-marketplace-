@@ -1,5 +1,3 @@
-import './globals.css'
-
 export const metadata = {
   title: 'TerraMarket',
   description: 'E-commerce Marketplace',
@@ -16,3 +14,4 @@ export default function RootLayout({
     </html>
   )
 }
+
