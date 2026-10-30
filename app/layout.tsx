@@ -1,14 +1,15 @@
+import './globals.css'
+
 export const metadata = {
   title: 'TerraMarket',
-  description: 'E-commerce Marketplace',
+  description: 'Sustainable E-commerce Marketplace',
 }
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>{children}</body>
     </html>
   )
 }
-
 
