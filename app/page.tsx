@@ -31,7 +31,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState<'shop' | 'seller' | 'analytics'>('shop')
   const [checkoutSuccess, setCheckoutSuccess] = useState(false)
 
-  // New Product Form State (For Sellers)
+  // Seller Form State
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState('')
@@ -72,7 +72,7 @@ export default function Home() {
       const { error } = await supabase.auth.signUp({ email, password })
       if (error) setAuthError(error.message)
       else {
-        alert('Check your email for confirmation or login directly!')
+        alert('Account created! You can now log in.')
         setAuthMode('login')
       }
     } else {
@@ -109,7 +109,7 @@ export default function Home() {
     if (error) {
       setUploadMsg(`Error: ${error.message}`)
     } else {
-      setUploadMsg('🎉 Product listed successfully to database!')
+      setUploadMsg('🎉 Product successfully recorded in Supabase database!')
       setTitle('')
       setDescription('')
       setPrice('')
@@ -223,7 +223,6 @@ export default function Home() {
       <div className="max-w-7xl mx-auto px-6 pt-10">
         {activeTab === 'shop' && (
           <>
-            {/* Hero Section */}
             <section className="mb-12 text-center max-w-2xl mx-auto">
               <span className="inline-block bg-orange-50 text-orange-600 text-xs font-semibold px-3 py-1 rounded-full mb-3 border border-orange-200/60">
                 Sustainable Goods • Consciously Sourced in Kenya
@@ -235,7 +234,6 @@ export default function Home() {
                 A minimalist marketplace connecting independent eco-artisans with conscious consumers.
               </p>
 
-              {/* Search Bar */}
               <div className="relative max-w-md mx-auto">
                 <input 
                   type="text"
@@ -247,14 +245,12 @@ export default function Home() {
               </div>
             </section>
 
-            {/* Notification Banner */}
             {checkoutSuccess && (
-              <div className="mb-8 p-4 bg-orange-50 border border-orange-200 text-orange-800 rounded-xl text-center text-sm font-medium animate-fadeIn">
+              <div className="mb-8 p-4 bg-orange-50 border border-orange-200 text-orange-800 rounded-xl text-center text-sm font-medium">
                 🎉 Order placed successfully! Thank you for supporting sustainable artisans.
               </div>
             )}
 
-            {/* Catalog Grid */}
             <section>
               <div className="flex justify-between items-center mb-6">
                 <h3 className="text-base font-semibold text-neutral-900">Explore Catalog</h3>
@@ -269,7 +265,7 @@ export default function Home() {
               ) : filteredProducts.length === 0 ? (
                 <div className="text-center py-20 border border-dashed border-neutral-200 rounded-2xl">
                   <p className="text-neutral-500 text-sm mb-1">No products found matching your search.</p>
-                  <p className="text-neutral-400 text-xs mb-4">Be the first artisan to add a product using the "Add Product (Seller)" tab!</p>
+                  <p className="text-neutral-400 text-xs mb-4">Be the first artisan to add a product using the "Add Product" tab!</p>
                   <button 
                     onClick={() => setActiveTab('seller')}
                     className="bg-neutral-900 text-white px-4 py-2 rounded-xl text-xs font-semibold"
@@ -280,7 +276,7 @@ export default function Home() {
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                   {filteredProducts.map((product) => (
-                    <div key={product.id} className="group bg-white border border-neutral-200/80 rounded-2xl p-4 flex flex-col justify-between hover:border-orange-500/50 hover:shadow-lg hover:shadow-orange-500/5 transition duration-300">
+                    <div key={product.id} className="group bg-white border border-neutral-200/80 rounded-2xl p-4 flex flex-col justify-between hover:border-orange-500/50 hover:shadow-lg transition duration-300">
                       <div>
                         <div className="relative overflow-hidden rounded-xl mb-4 bg-neutral-100 aspect-square">
                           <img 
@@ -319,12 +315,12 @@ export default function Home() {
             <div className="bg-white border border-neutral-200 rounded-2xl p-8 shadow-sm">
               <h2 className="text-2xl font-light mb-2">Seller Product Portal</h2>
               <p className="text-neutral-500 text-xs mb-6">
-                List a new eco-friendly product. It will be immediately recorded into your Supabase database and displayed on the live catalog.
+                List a new eco-friendly product. It will immediately save to your Supabase database.
               </p>
 
               {!session && (
                 <div className="mb-6 p-4 bg-orange-50 border border-orange-200 text-orange-800 rounded-xl text-xs">
-                  ⚠️ You need to be logged in to add products to the database. <button onClick={() => setAuthMode('login')} className="underline font-bold">Login here</button>
+                  ⚠️ You must be logged in to upload products to the database. <button onClick={() => setAuthMode('login')} className="underline font-bold">Login here</button>
                 </div>
               )}
 
@@ -352,7 +348,7 @@ export default function Home() {
                   <textarea 
                     rows={3}
                     required
-                    placeholder="Describe materials, origin, and craftsmanship..."
+                    placeholder="Describe craftsmanship and origin..."
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-orange-500"
@@ -416,16 +412,16 @@ export default function Home() {
 
             <div className="grid gap-6">
               <div className="border border-neutral-200 p-6 rounded-2xl bg-neutral-50/50">
-                <h3 className="font-semibold text-base mb-2 text-orange-600">1. Revenue Generation (Commission Structure)</h3>
+                <h3 className="font-semibold text-base mb-2 text-orange-600">1. Revenue Generation</h3>
                 <p className="text-sm text-neutral-600 leading-relaxed">
-                  TerraMarket charges a transparent <strong>8% platform commission</strong> on transactions processed securely via Supabase and integrated payment systems in KSh.
+                  TerraMarket charges an <strong>8% commission</strong> on transactions processed securely via Supabase in KSh.
                 </p>
               </div>
 
               <div className="border border-neutral-200 p-6 rounded-2xl bg-neutral-50/50">
                 <h3 className="font-semibold text-base mb-2 text-orange-600">2. Artisan Value Proposition</h3>
                 <p className="text-sm text-neutral-600 leading-relaxed">
-                  Eco-artisans gain an instant digital storefront with zero setup fees, automated inventory tracking, and direct sales management through the seller portal.
+                  Eco-artisans gain a digital storefront with zero setup fees, automated inventory, and direct sales management.
                 </p>
               </div>
             </div>
@@ -437,4 +433,10 @@ export default function Home() {
       {authMode && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-neutral-900/40 backdrop-blur-xs">
           <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl relative">
-            <button onClick={() => setAuthMode(null)} className="absolute top-4 right-4 text-neutral-400 hover:text-neutr
+            <button onClick={() => setAuthMode(null)} className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-700">✕</button>
+            <h3 className="text-xl font-bold mb-2">{authMode === 'login' ? 'Welcome Back' : 'Create Account'}</h3>
+            <p className="text-xs text-neutral-500 mb-6">Access your TerraMarket seller account or manage purchases.</p>
+
+            {authError && <div className="mb-4 p-3 bg-red-50 text-red-600 rounded-xl text-xs">{authError}</div>}
+
+            <for
