@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://rooqmdajofzxhqpmdhrs.supabase.co'
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'Sb_publishable_NOkG9kvA45hMhgBjQs2pgQ_KOrsWeWA'
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJvb3FtZGFqb2Z6eGhxcG1kaHJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyOTIyMjQsImV4cCI6MjEwODg2ODIyNH0.RyUldzQS7skf-6tvWL5Fb3Bfacev56DthfpEVf3RKIo'
 const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 interface Product {
